@@ -37,23 +37,23 @@ let active = false; // exempel för att visa att du kan lägga till klass för a
 
 let achievements = [
     {
-        description: 'Museet är redo att öppna, grattis! ',
-        requiredUpgrades: 1,
-        acquired: false,
-    },
-    {
-        description: 'Nu börjar det likna något, fortsätt gräva!',
+        description: 'Gumboda ser dig...',
         requiredUpgrades: 10,
         acquired: false,
     },
     {
-        description: 'Klickare, med licens att klicka!',
-        requiredClicks: 10,
+        description: 'Gumboda är efter dig, agera varsamt',
+        requiredUpgrades: 100,
         acquired: false,
     },
     {
-        description: 'Tac-2 god!',
-        requiredClicks: 10000,
+        description: 'Gumbodageddon har anlänt',
+        requiredUpgrades: 1000,
+        acquired: false,
+    },
+    {
+        description: 'Jokijärvi',
+        requiredClicks: 100,
         acquired: false,
     },
 ];
@@ -163,22 +163,22 @@ window.addEventListener('load', (event) => {
  */
 upgrades = [
     {
-        name: 'Sop',
-        cost: 10,
-        amount: 1,
-    },
-    {
-        name: 'Kvalitetsspade',
+        name: 'Henrik',
         cost: 50,
         clicks: 2,
     },
     {
-        name: 'Skottkärra',
+        name: 'Gabriel',
+        cost: 10,
+        amount: 1,
+    },
+    {
+        name: 'Oscar',
         cost: 100,
         amount: 10,
     },
     {
-        name: 'Grävmaskin',
+        name: 'Olle',
         cost: 1000,
         amount: 100,
     },
@@ -209,23 +209,22 @@ function createCard(upgrade) {
     header.classList.add('title');
     const cost = document.createElement('p');
     if (upgrade.amount) {
-        header.textContent = `${upgrade.name}, +${upgrade.amount} per sekund.`;
+        header.textContent = `${upgrade.name}, +${upgrade.amount} SPS.`;
     } else {
-        header.textContent = `${upgrade.name}, +${upgrade.clicks} per klick.`;
+        header.textContent = `${upgrade.name}, +${upgrade.clicks} SPK.`;
     }
-    cost.textContent = `Köp för ${upgrade.cost} benbitar.`;
+    cost.textContent = ` ${upgrade.cost} Sam.`;
 
     card.addEventListener('click', (e) => {
         if (money >= upgrade.cost) {
             acquiredUpgrades++;
             money -= upgrade.cost;
             upgrade.cost *= 1.5;
-            cost.textContent = 'Köp för ' + upgrade.cost + ' benbitar';
+            cost.textContent = Math.round(upgrade.cost) + ' Sam';
             moneyPerSecond += upgrade.amount ? upgrade.amount : 0;
             moneyPerClick += upgrade.clicks ? upgrade.clicks : 0;
-            message('Grattis du har köpt en uppgradering!', 'success');
         } else {
-            message('Du har inte råd.', 'warning');
+            message('Fattig HAHA', 'warning');
         }
     });
 
